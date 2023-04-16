@@ -1,0 +1,240 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+    {% block title %}{{ title|upper }}{% endblock %}
+    {% block content %}
+        <div class="container-fluid margin-top">
+            <div class="d-flex justify-content-between text-white px-5 align-items-center border-bottom pb-3 border-secondary">
+                <h4>Filter</h4>
+                <div class="d-flex justify-content-between align-items-center text-weight">
+                    <i onclick="reload()" class="fa-solid fa-rotate-right reload me-3 nav-hover" style="font-size:130%"></i>
+                    <div class="vr me-3"></div>
+                    <form class="form-inline d-flex">
+                        {% csrf_token %}
+                        <input class="form-control me-3" type="search" name="search" id="search" placeholder="Search" aria-label="Search" style="width:300px">
+                        <button class="btn btn-outline-success me-3" type="submit">Search</button>
+                    </form>
+<!--                    <a href="#" class="nav-link me-3 nav-hover" style="font-size:130%">Publishing <i class="fa-solid fa-arrow-up"></i></a>-->
+<!--                    <a href="#" class="nav-link me-3 nav-hover" style="font-size:130%">Price <i class="fa-solid fa-arrow-up"></i></a>-->
+<!--                    <a href="#" class="nav-link nav-hover" style="font-size:130%">Float <i class="fa-solid fa-arrow-up"></i></a>-->
+                    <form class="form-inline d-flex">
+                        {% csrf_token %}
+                        <div class="form-check">
+                            <input onchange="this.form.submit()" type="checkbox" name="sort-publishing" id="sort-publishing" class="form-check-input sort-input"><label for="sort-publishing" class="form-check-label sort-label">Publishing</label>
+                        </div>
+                        <div class="form-check">
+                            <input onchange="this.form.submit()" type="checkbox" name="sort-price" id="sort-price" class="form-check-input sort-input"><label for="sort-price" class="form-check-label sort-label">Price</label>
+                        </div>
+                        <div class="form-check">
+                            <input onchange="this.form.submit()" type="checkbox" name="sort-float" id="sort-float" class="form-check-input sort-input"><label for="sort-float" class="form-check-label sort-label">Float</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-secondary pt-2 px-3 rounded-3" style="height:45px">
+                    <p class="text-weight" style="font-size:120%">zł  <i class="fa-solid fa-cart-shopping"></i></p>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-sm-2 ps-3 text-white">
+                    <form action="{% url 'shop' %}" class="ms-3">
+                        <div class="px-2 d-flex justify-content-between align-content-center">
+                            <h5 class="text-right">Price</h5>
+                            <span class="mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#price"><i class="fa-solid fa-caret-down rotate" style="font-size:120%"></i></span>
+                        </div>
+                        <div class="collapse" id="price">
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input type="number" name="min-price" id="min-price" class="form-control" style="width:90px" placeholder="from" min="0">
+                                </div>
+                                <div class="form-check">
+                                    <input type="number" name="max-price" id="max-price" class="form-control" style="width:90px" placeholder="to" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 d-flex justify-content-between align-content-center">
+                            <h5 class="text-right">Type</h5>
+                            <span class="mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#type"><i class="fa-solid fa-caret-down rotate" style="font-size:120%"></i></span>
+                        </div>
+                        <div class="align-items-center collapse ms-5" id="type">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="knifes" name="knifes" value="knifes" data-bs-toggle="collapse" data-bs-target="#more-knifes">
+                                <label class="form-check-label check-label" for="knifes">Knifes</label>
+                                <div class="collapse" id="more-knifes">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in knifes %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="gloves" name="gloves" value="gloves" data-bs-toggle="collapse" data-bs-target="#more-gloves">
+                                <label class="form-check-label" for="gloves">Gloves</label>
+                                <div class="collapse" id="more-gloves">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in gloves %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="pistols" name="pistols" value="pistols" data-bs-toggle="collapse" data-bs-target="#more-pistols">
+                                <label class="form-check-label" for="pistols">Pistols</label>
+                                <div class="collapse" id="more-pistols">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in pistols %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="sub-machine-guns" name="sub-machine-guns" value="sub-machine-guns" data-bs-toggle="collapse" data-bs-target="#more-sub-machine-guns">
+                                <label class="form-check-label" for="sub-machine-guns">Sub-Machine Guns</label>
+                                <div class="collapse" id="more-sub-machine-guns">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in sub_machine_guns %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="assault-rifles" name="assault-rifles" value="assault-rifles" data-bs-toggle="collapse" data-bs-target="#more-assault-rifles">
+                                <label class="form-check-label" for="assault-rifles">Assault Rifles</label>
+                                <div class="collapse" id="more-assault-rifles">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in assault_rifles %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="sniper-rifles" name="sniper-rifles" value="sniper-rifles" data-bs-toggle="collapse" data-bs-target="#more-sniper-rifles">
+                                <label class="form-check-label" for="sniper-rifles">Sniper Rifles</label>
+                                <div class="collapse" id="more-sniper-rifles">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in sniper_rifles %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="shotguns" name="shotguns" value="shotguns" data-bs-toggle="collapse" data-bs-target="#more-shotguns">
+                                <label class="form-check-label" for="shotguns">Shotguns</label>
+                                <div class="collapse" id="more-shotguns">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in shotguns %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="machine-guns" name="machine-guns" value="machine-guns" data-bs-toggle="collapse" data-bs-target="#more-machine-guns">
+                                <label class="form-check-label" for="machine-guns">Machine Guns</label>
+                                <div class="collapse" id="more-machine-guns">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in machine_guns %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="keys" name="keys" value="keys">
+                                <label class="form-check-label" for="keys">Keys</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="other" name="other" value="other" data-bs-toggle="collapse" data-bs-target="#more-other">
+                                <label class="form-check-label" for="other">Other</label>
+                                <div class="collapse" id="more-other">
+                                    <div class="d-flex flex-wrap">
+                                        {% for item in other %}
+                                            <input type="checkbox" class="custom-checkbox" id="{{item}}" value="{{item}}" name="{{item}}"><label for="{{item}}" class="custom-label ms-2 mt-2">{{item}}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 d-flex justify-content-between align-content-center">
+                            <h5 class="text-right">Appearance</h5>
+                            <span class="mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#appearance"><i class="fa-solid fa-caret-down rotate" style="font-size:120%"></i></span>
+                        </div>
+                        <div class="align-items-center collapse ms-5" id="appearance">
+                            {% for item in appearance %}
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="{{item}}" name="{{item}}" value="{{item}}">
+                                    <label class="form-check-label check-label" for="{{item}}">{{item}}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-check checkbox-lg">
+                            <input type="checkbox" name="stattrak" id="stattrak" value="stattrak" class="form-check-input">
+                            <label for="stattrak" class="form-check-label check-label">StatTrak<sup>TM</sup></label>
+                        </div>
+                        <div class="px-2 d-flex justify-content-between align-content-center">
+                            <h5 class="text-right">Float</h5>
+                            <span class="mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#float"><i class="fa-solid fa-caret-down rotate" style="font-size:120%"></i></span>
+                        </div>
+                        <div class="collapse" id="float">
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input type="number" name="min-float" id="min-float" class="form-control" style="width:90px" placeholder="from" max="1" min="0" step="any">
+                                </div>
+                                <div class="form-check">
+                                    <input type="number" name="max-float" id="max-float" class="form-control" style="width:90px" placeholder="to" max="1" min="0" step="any">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 d-flex justify-content-between align-content-center">
+                            <h5 class="text-right">Quality</h5>
+                            <span class="mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#quality"><i class="fa-solid fa-caret-down rotate" style="font-size:120%"></i></span>
+                        </div>
+                        <div class="align-items-center collapse ms-5" id="quality">
+                            {% for item in quality %}
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="{{item}}" name="{{item}}" value="{{item}}">
+                                    <label class="form-check-label check-label" for="{{item}}">{{item}}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="px-2 d-flex justify-content-between align-content-center">
+                            <h5 class="text-right">Pattern</h5>
+                            <span class="mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#pattern"><i class="fa-solid fa-caret-down rotate" style="font-size:120%"></i></span>
+                        </div>
+                        <div class="collapse ms-5" id="pattern">
+                            <div class="form-check">
+                                <input type="number" name="pattern" id="pattern-input" class="form-control" min="0" max="999" style="width:90px" placeholder="000">
+                            </div>
+                        </div>
+                        <div class="d-flex mt-5 justify-content-around">
+                            <button type="reset" class="btn btn-outline-danger">Reset</button>
+                            <button class="btn btn-outline-success" type="submit">Use</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-10 ps-5 text-white">
+                    {% if skins|length > 0 %}
+                        <div class="grid-shop-skins">
+                            {% for item in skins %}
+                                <div class="card" style="width:120px; height:180px">
+                                    <img src="{{ item.photo.url }}" alt="{{ item.title }}" class="card-img-top">
+                                    <div class="card-body">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <button class="btn btn-success" name="basket_{{ item.title }}" value="buy_{{ item.title }}" style="width:110px;padding:0;margin-left:-14px"><i class="fa-solid fa-cart-shopping"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <h4 class="text-secondary text-center mt-5">None products with this category/ies</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}

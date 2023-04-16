@@ -1,0 +1,70 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+    {% block title %}{{ title|upper }}{% endblock %}
+    {% block content %}
+        <div class="container margin-top mb-5">
+            <div id="demo" class="carousel slide mb-5" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="card mx-auto" style="width:700px">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">The best skins</h2>
+                                <p class="card-text text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, perspiciatis, quam? Consectetur modi nemo neque obcaecati officia voluptatem. Architecto assumenda dolor esse excepturi maiores nulla obcaecati perspiciatis saepe! Dolores, sapiente?</p>
+                                <a href="{% url 'shop' %}" class="btn btn-success" style="margin-left:42.5%">Click me!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card mx-auto" style="width:700px">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">The best price</h2>
+                                <p class="card-text text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, perspiciatis, quam? Consectetur modi nemo neque obcaecati officia voluptatem. Architecto assumenda dolor esse excepturi maiores nulla obcaecati perspiciatis saepe! Dolores, sapiente?</p>
+                                <a href="{% url 'shop' %}" class="btn btn-success" style="margin-left:42.5%">Click me!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card mx-auto" style="width:700px">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">The best quality</h2>
+                                <p class="card-text text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, perspiciatis, quam? Consectetur modi nemo neque obcaecati officia voluptatem. Architecto assumenda dolor esse excepturi maiores nulla obcaecati perspiciatis saepe! Dolores, sapiente?</p>
+                                <a href="{% url 'shop' %}" class="btn btn-success" style="margin-left:42.5%">Click me!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <div class="card" style="width:210px">
+                        <img src="{% static 'shop/images/github.png' %}" alt="GitHub" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">GitHub</h4>
+                            <p class="card-text text-center">If you see my projects, click here ↓</p>
+                            <a href="https://github.com/SAMAKAKI" class="btn btn-success" style="margin-left:35px" target="_blank">Click me!</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width:210px">
+                        <img src="{% static 'shop/images/facebook.png' %}" alt="GitHub" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Facebook</h4>
+                            <p class="card-text text-center">If you see me and my life, click here ↓</p>
+                            <a href="https://github.com/SAMAKAKI" class="btn btn-success" style="margin-left:35px" target="_blank">Click me!</a>
+                        </div>
+                    </div>
+                <div class="card" style="width:210px">
+                    <img src="{% static 'shop/images/instagram.png' %}" alt="GitHub" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Instagram</h4>
+                        <p class="card-text text-center">If you see me and my life, click here ↓</p>
+                        <a href="https://www.instagram.com/nikitashorichev/" class="btn btn-success" style="margin-left:35px" target="_blank">Click me!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
